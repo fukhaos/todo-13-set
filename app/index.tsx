@@ -25,6 +25,28 @@ export default function Index() {
     setNewItem("");
   }
 
+  const updateTodo = (id: string) => {
+    setTodos((prevTodos) => {
+      return prevTodos.map((todo) => {
+        if (todo.id == id) {
+          return { ...todo, completed: !todo.completed };
+        }
+        return todo;
+      })
+    });
+  }
+
+  const deleteTodo = (id: string) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter((todo) => {
+        if (todo.id == id) {
+          return false;
+        }
+        return true;
+      })
+    });
+  }
+
 
   return (
     <ScrollView style={styles.container}>
@@ -33,7 +55,7 @@ export default function Index() {
       <SuperButton title="Adicionar" disabled={newItem.length <= 3} onPress={addItem} />
 
       {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
+        <TodoItem key={todo.id} todo={todo} updateTodo={updateTodo} deleteTodo={deleteTodo} />
       ))}
 
 
