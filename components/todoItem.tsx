@@ -1,20 +1,24 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-interface ITodoItem {
+export interface ITodoItem {
+    id: string;
     title: string;
+    completed: boolean;
 }
 
-const TodoItem = ({ title }: ITodoItem) => {
+interface Item {
+    todo: ITodoItem;
+}
+
+export const TodoItem = ({ todo }: Item) => {
     return (
         <TouchableOpacity style={styles.container}>
             <Ionicons name="bookmark-outline" size={24} color="black" />
-            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.title}>{todo.title}</Text>
         </TouchableOpacity>
     )
 }
-
-export default TodoItem;
 
 const styles = StyleSheet.create({
     container: {
@@ -27,7 +31,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: '#e4e4e4',
         height: 50,
-        width: '100%'
+        width: '100%',
     },
     title: {
         marginLeft: 10,
